@@ -1,0 +1,15 @@
+#This playbook created for installing application and testing "how loop will work in ansible"
+
+---
+- name: Installing program
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Install app
+    apt: name={{ item }} state=latest
+    with_items:
+      - python3 
+      - apache2
+      - locate
+      - openjdk-8-jdk
