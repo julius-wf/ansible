@@ -1,0 +1,8 @@
+---
+ - name: Site with roles
+   hosts: all
+   become: true
+
+   roles:
+    - { role: deploy_web, when: ansible_system == 'Linux' }
+    

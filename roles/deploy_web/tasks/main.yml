@@ -1,0 +1,26 @@
+---
+# tasks file for deploy_web
+    - name: "say hello to remote server"
+      ping:
+    - name: "Lets check OS"
+      debug: var=ansible_os_family
+    - name: "Lets check ip v4 addr"
+      shell: ip addr
+      register: result
+    - debug:
+        msg: "{{ result.stdout_lines }}"
+#Testing and getting info about our host 
+
+
+    - name: "Installing apache"
+      apt: name=apache2 state=latest
+# Installing apache
+
+    - name: Adding html file to remote hosts
+      copy: src={{ item }} dest={{ destin_folder }} mode=0555
+      loop:
+        - index.html
+        - tiger.jpeg
+        - raw.jpeg
+      notify: Restart Apache 
+# Copy source file to remote host
